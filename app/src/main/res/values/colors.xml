@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_blue">#64B5F6</color>
     <!-- Material 3 color system -->
     <color name="primary">#6750A4</color>
     <color name="on_surface">#1C1B1F</color>
