@@ -26,7 +26,7 @@
             android:id="@+id/imageCommodity"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:src="@drawable/ic_commodity_placeholder"
+            android:src="@drawable/image_bg"
             android:scaleType="centerCrop"
             android:contentDescription="Commodity image"
             android:background="@drawable/image_circle_bg"

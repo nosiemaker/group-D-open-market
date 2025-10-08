@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">Open Market</string>
+    <string name="app_name">Open Market Price Tracker</string>
+    <string name="add_price">Add Price</string>
+    <string name="commodity">Commodity</string>
+    <string name="choose_commodity">Choose Commodity</string>
+    <string name="unit_e_g_per_kg">Unit (e.g., per Kg)</string>
+    <string name="date">Date</string>
+    <string name="selected_date">Selected Date</string>
+    <string name="enter_price">Enter Price</string>
+    <string name="price_input">Price Input</string>
+    <string name="save">Save</string>
+    <string name="save_price">Save Price</string>
+    <string name="Price_input" />
+    <string name="select_commodity">Select Commodity</string>
+    <string name="price">Price (ZMW)</string>
+    <string name="dd_mm_yyyy">DD-MM-YYYY</string>
+    <string name="add_commodity_price_screen">Add Commodity Price Screen</string>
+    <string name="unit">"Unit: "</string>
+    <string name="invalid_date_error">Invalid date entered...please enter date in correct format</string>
+    <string name="edit_price_error">Price cannot be empty</string>
+    <string name="select_date">Select Date</string>
 </resources>
