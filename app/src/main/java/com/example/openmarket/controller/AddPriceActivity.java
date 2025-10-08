@@ -149,11 +149,11 @@ public class AddPriceActivity extends AppCompatActivity {
         try {
             price = Double.parseDouble(input);
 
-            if (price < 0) {
+            if (price <= 0) {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            editPriceError.setText((price < 0 ? "Price must be greater than 0" : "Invalid number entered"));
+            editPriceError.setText((price <= 0 ? "Price must be greater than 0.00" : "Invalid number entered"));
             editPriceError.setVisibility(View.VISIBLE);
             editPrice.setBackgroundResource(R.drawable.edit_text_error_backgroud);
             editPrice.requestFocus();
