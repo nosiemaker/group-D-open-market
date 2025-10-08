@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenMarket">
         <activity
-            android:name=".controller.AddPriceActivity"
+            android:name=".controller.TrendsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
