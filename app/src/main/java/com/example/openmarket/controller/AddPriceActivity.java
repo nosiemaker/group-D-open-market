@@ -1,6 +1,7 @@
 package com.example.openmarket.controller;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.*;
@@ -8,11 +9,14 @@ import android.view.*;
 import com.example.openmarket.model.PriceRecord;
 
 import android.widget.*;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.openmarket.model.Commodity;
 import com.example.openmarket.R;
 import com.example.openmarket.fdata.FakeRepo;
+import com.example.openmarket.utility.Unit;
 
 
 import java.time.LocalDate;
@@ -20,7 +24,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class AddPriceActivity extends AppCompatActivity {
+    private TextView commodityError;
     private Spinner spinnerCommodity;
+
+    private Drawable defaultSpinnerBackground;
     private TextView textUnit;
     private TextView editPriceError;
     private EditText editPrice;
@@ -43,6 +50,8 @@ public class AddPriceActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        //load views from activity_price_entry.xml
+        commodityError = findViewById(R.id.commodity_error);
         spinnerCommodity = findViewById(R.id.spinner_commodity);
         textUnit = findViewById(R.id.text_unit);
         editDateError = findViewById(R.id.edit_date_error);
@@ -51,22 +60,22 @@ public class AddPriceActivity extends AppCompatActivity {
         editPrice = findViewById(R.id.edit_price);
         saveButton = findViewById(R.id.button_save);
 
+        //set default date to current date
         date = LocalDate.now();
         editDate.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         editDate.setOnClickListener(v -> showDatePicker());
+
+        //temporarily store default background
+        defaultSpinnerBackground = spinnerCommodity.getBackground();
     }
 
     private void setupSpinnerCommodity() {
         List<Commodity> commodities = FakeRepo.getCommodities();
+        //represents no commodity selected
+        commodities.add(0, new Commodity("Select Commodity", Unit.DEFAULT));
 
-        ArrayAdapter<Commodity> adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                commodities
-        );
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<Commodity> adapter = getCommodityArrayAdapter(commodities, this);
 
         spinnerCommodity.setAdapter(adapter);
 
@@ -86,9 +95,42 @@ public class AddPriceActivity extends AppCompatActivity {
         );
     }
 
+    @NonNull
+    private static ArrayAdapter<Commodity> getCommodityArrayAdapter(List<Commodity> commodities, AddPriceActivity addPriceActivity) {
+        ArrayAdapter<Commodity> adapter = new ArrayAdapter<>(
+                addPriceActivity,
+                android.R.layout.simple_spinner_item,
+                commodities
+        ) {
+            @Override
+            public boolean isEnabled(int position) {
+                return position != 0; //disable selection of default item
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+
+                if (position == 0) {
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return adapter;
+    }
+
     private  void setUpSaveButton() {
         saveButton.setOnClickListener(e -> {
-            resetErrors();
+            resetErrors();  //erase error messages and highlights
+
+            //validate input
+            if (!validCommodity()) return;
 
             if (!isValidPrice()) return;
 
@@ -97,15 +139,18 @@ public class AddPriceActivity extends AppCompatActivity {
                 editDate.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             }
 
+            //collect input and encapsulate data into their respective objects
             Commodity commodity = (Commodity) spinnerCommodity.getSelectedItem();
 
             PriceRecord priceRecord = new PriceRecord(commodity, price, date);
 
             FakeRepo.addPrice(priceRecord);
 
+            //reset input fields
             editPrice.setText("");
             editDate.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
+            //indicate success
             Toast.makeText(this, "Price successfully saved", Toast.LENGTH_SHORT).show();
         });
     }
@@ -127,7 +172,23 @@ public class AddPriceActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    private boolean validCommodity() {
+        int pos = spinnerCommodity.getSelectedItemPosition();
+
+        if (pos == 0) {
+            commodityError.setText(R.string.please_select_a_commodity);
+            commodityError.setVisibility(View.VISIBLE);
+            spinnerCommodity.setBackgroundResource(R.drawable.edit_text_error_backgroud);
+            spinnerCommodity.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
     private void resetErrors() {
+        commodityError.setVisibility(View.GONE);
+        spinnerCommodity.setBackground(defaultSpinnerBackground);
+
         editDateError.setVisibility(View.GONE);
         editDate.setBackgroundResource(R.drawable.edit_text_background);
 

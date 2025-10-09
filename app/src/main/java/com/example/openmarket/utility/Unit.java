@@ -1,6 +1,7 @@
 package com.example.openmarket.utility;
 
 public enum Unit {
+    DEFAULT("Unit"),
     KILOGRAMS("kg"),
     BAGS("bags"),
     TONNES("t"),

@@ -19,4 +19,5 @@
     <string name="invalid_date_error">Invalid date entered...please enter date in correct format</string>
     <string name="edit_price_error">Price cannot be empty</string>
     <string name="select_date">Select Date</string>
+    <string name="please_select_a_commodity">Please select a commodity</string>
 </resources>
