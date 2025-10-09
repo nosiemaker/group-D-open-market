@@ -35,4 +35,8 @@ public class FakeRepo {
                 .filter(pr -> pr.getCommodity().getName().equals(commodity.getName()))
                 .collect(Collectors.toList());
     }
+
+    public static void addCommodity(Commodity commodity) {
+        commodities.add(commodity);
+    }
 }
