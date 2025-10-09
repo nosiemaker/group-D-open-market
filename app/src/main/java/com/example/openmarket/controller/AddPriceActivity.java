@@ -50,6 +50,7 @@ public class AddPriceActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        //load views from activity_price_entry.xml
         commodityError = findViewById(R.id.commodity_error);
         spinnerCommodity = findViewById(R.id.spinner_commodity);
         textUnit = findViewById(R.id.text_unit);
@@ -59,16 +60,19 @@ public class AddPriceActivity extends AppCompatActivity {
         editPrice = findViewById(R.id.edit_price);
         saveButton = findViewById(R.id.button_save);
 
+        //set default date to current date
         date = LocalDate.now();
         editDate.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         editDate.setOnClickListener(v -> showDatePicker());
 
+        //temporarily store default background
         defaultSpinnerBackground = spinnerCommodity.getBackground();
     }
 
     private void setupSpinnerCommodity() {
         List<Commodity> commodities = FakeRepo.getCommodities();
+        //represents no commodity selected
         commodities.add(0, new Commodity("Select Commodity", Unit.DEFAULT));
 
         ArrayAdapter<Commodity> adapter = getCommodityArrayAdapter(commodities, this);
@@ -100,7 +104,7 @@ public class AddPriceActivity extends AppCompatActivity {
         ) {
             @Override
             public boolean isEnabled(int position) {
-                return position != 0;
+                return position != 0; //disable selection of default item
             }
 
             @Override
@@ -123,26 +127,30 @@ public class AddPriceActivity extends AppCompatActivity {
 
     private  void setUpSaveButton() {
         saveButton.setOnClickListener(e -> {
-            resetErrors();
+            resetErrors();  //erase error messages and highlights
+
+            //validate input
+            if (!validCommodity()) return;
 
             if (!isValidPrice()) return;
-
-            if (!validCommodity()) return;
 
             if (editDate.getText().toString().isEmpty()) {
                 date = LocalDate.now();
                 editDate.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             }
 
+            //collect input and encapsulate data into their respective objects
             Commodity commodity = (Commodity) spinnerCommodity.getSelectedItem();
 
             PriceRecord priceRecord = new PriceRecord(commodity, price, date);
 
             FakeRepo.addPrice(priceRecord);
 
+            //reset input fields
             editPrice.setText("");
             editDate.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
+            //indicate success
             Toast.makeText(this, "Price successfully saved", Toast.LENGTH_SHORT).show();
         });
     }
