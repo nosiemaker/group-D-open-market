@@ -45,4 +45,5 @@
     <string name="no_data">No data</string>
     <string name="no_data_available">No data available</string>
     <string name="select_a_commodity_to_view_price_trends">Select a commodity to view price trends</string>
+    <string name="please_select_a_commodity">Please select a commodity\n</string>
 </resources>
