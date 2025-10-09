@@ -17,6 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="140dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="16dp">
@@ -81,7 +82,6 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:src="@drawable/ic_schedule"
-                    android:tint="@color/on_surface_variant"
                     android:layout_marginEnd="4dp" />
 
                 <TextView
@@ -90,6 +90,8 @@
                     android:layout_height="wrap_content"
                     android:text="Updated 2h ago"
                     android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/on_surface_variant" />
 
             </LinearLayout>
@@ -110,6 +112,8 @@
                     android:text="K150.00"
                     android:textStyle="bold"
                     android:textSize="20sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/primary" />
 
                 <!-- Price change indicator -->
@@ -128,7 +132,6 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:src="@drawable/ic_trending_up"
-                        android:tint="@color/white"
                         android:layout_marginEnd="4dp" />
 
                     <TextView
@@ -138,6 +141,7 @@
                         android:text="+5.2%"
                         android:textSize="12sp"
                         android:textStyle="bold"
+                        android:maxLines="1"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -169,6 +173,7 @@
                     android:layout_height="wrap_content"
                     android:text="per kg"
                     android:textSize="11sp"
+                    android:maxLines="1"
                     android:textColor="@color/on_surface_variant" />
 
             </LinearLayout>

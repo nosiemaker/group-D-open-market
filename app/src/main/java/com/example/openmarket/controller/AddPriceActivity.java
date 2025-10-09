@@ -36,6 +36,7 @@ public class AddPriceActivity extends AppCompatActivity {
     private Button saveButton;
     private LocalDate date;
     private double price;
+    private String selectedCommodityName;
 
 
     @Override
@@ -43,6 +44,10 @@ public class AddPriceActivity extends AppCompatActivity {
         super.onCreate(savedInstance);
 
         setContentView(R.layout.activity_price_entry);
+
+        // Get the commodity name passed from the previous activity
+        selectedCommodityName = getIntent().getStringExtra("COMMODITY_NAME");
+
         initViews();
         resetErrors();
         setupSpinnerCommodity();
@@ -78,6 +83,16 @@ public class AddPriceActivity extends AppCompatActivity {
         ArrayAdapter<Commodity> adapter = getCommodityArrayAdapter(commodities, this);
 
         spinnerCommodity.setAdapter(adapter);
+
+        // Pre-select the commodity if one was passed
+        if (selectedCommodityName != null) {
+            for (int i = 0; i < commodities.size(); i++) {
+                if (commodities.get(i).getName().equals(selectedCommodityName)) {
+                    spinnerCommodity.setSelection(i);
+                    break;
+                }
+            }
+        }
 
         spinnerCommodity.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
@@ -152,6 +167,9 @@ public class AddPriceActivity extends AppCompatActivity {
 
             //indicate success
             Toast.makeText(this, "Price successfully saved", Toast.LENGTH_SHORT).show();
+
+            // Close activity and return to commodity list
+            finish();
         });
     }
 
@@ -164,7 +182,7 @@ public class AddPriceActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 (view, selectedYear, selectedMonth, selectedDay) -> {
-                    date = LocalDate.of(selectedYear, selectedMonth, selectedDay);
+                    date = LocalDate.of(selectedYear, selectedMonth + 1, selectedDay);
                     editDate.setText(date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 },
                 year, month, day

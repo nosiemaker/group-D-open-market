@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenMarket">
         <activity
+            android:name=".controller.AddCommodityActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.AddPriceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.CommodityListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

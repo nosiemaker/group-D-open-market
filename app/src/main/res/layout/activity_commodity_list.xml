@@ -2,26 +2,20 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trendBtn"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- Toolbar -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:title="Commodity List"
-        app:menu="@menu/menu_main" />
-
-    <!-- List of commodities -->
 
 
     <!-- Floating button to Add Price -->
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCommodities"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
         android:clipToPadding="false"
         android:padding="8dp"
@@ -29,12 +23,44 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddPrice"
-        android:layout_width="wrap_content"
+        android:layout_width="84dp"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:contentDescription="Add Price"
-        app:srcCompat="@android:drawable/ic_input_add"
         app:layout_anchor="@id/recyclerCommodities"
         app:layout_anchorGravity="bottom|end"
-        android:layout_margin="16dp" />
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="712dp">
+
+        <ImageButton
+            android:id="@+id/trendsBtn"
+            android:layout_width="49dp"
+            android:layout_height="42dp"
+            android:contentDescription="trends"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.774"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_trending_up" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="275dp"
+            android:layout_height="44dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.117"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.019"
+            app:srcCompat="@drawable/screenshot_20251001_230344" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
