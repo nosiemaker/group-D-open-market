@@ -1,6 +1,9 @@
 package com.example.openmarket.utility;
 
+import com.example.openmarket.fdata.FakeRepo;
+import com.example.openmarket.model.Commodity;
 import com.example.openmarket.model.CommodityPrice;
+import com.example.openmarket.model.PriceRecord;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,13 +47,13 @@ public class DataUtils {
         return new ArrayList<>();
     }
 
-    public static CommodityPrice getLatestPrice(String commodity) {
+  /** public static CommodityPrice getLatestPrice(String commodity) {
         List<CommodityPrice> prices = getPricesForCommodity(commodity);
         if(!prices.isEmpty()){
             return prices.get(prices.size() - 1);
         }
         return null;
-    }
+    } */
 
     public static Map<String, Float> getPriceStatistics(String commodity) {
         Map<String,Float>  stats = new HashMap<>();
@@ -132,5 +135,6 @@ public class DataUtils {
 
         return prices;
     }
+
 }
 
