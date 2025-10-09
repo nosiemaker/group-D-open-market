@@ -25,12 +25,13 @@
             android:contentDescription="@string/add_commodity_price_screen" />
 
         <TextView
-            android:id="@+id/label_commodity"
+            android:id="@+id/commodity_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/select_commodity"
-            android:textStyle="bold"
-            android:labelFor="@+id/spinner_commodity" />
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="12sp"
+            android:visibility="gone"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinner_commodity"
