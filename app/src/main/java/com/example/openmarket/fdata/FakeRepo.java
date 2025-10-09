@@ -14,6 +14,8 @@ public class FakeRepo {
         commodities.add(new Commodity("Maize", Unit.KILOGRAMS));
         commodities.add(new Commodity("Copper", Unit.TONNES));
         commodities.add(new Commodity("Mealie Meal", Unit.BAGS));
+
+
     }
 
     public static void addPrice(PriceRecord priceRecord) { priceRecords.add(priceRecord); }
