@@ -15,6 +15,9 @@
             android:name=".controller.AddCommodityActivity"
             android:exported="false" />
         <activity
+            android:name=".controller.TrendsActivity"
+            android:exported="false" />
+        <activity
             android:name=".controller.AddPriceActivity"
             android:exported="false" />
         <activity

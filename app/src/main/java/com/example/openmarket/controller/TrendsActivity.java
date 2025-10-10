@@ -372,7 +372,7 @@ public class TrendsActivity extends AppCompatActivity {
     }
 
     private void navigateToHome() {
-        Intent intent = new Intent(this, CommodityPrice.class);//change to themba's class
+        Intent intent = new Intent(this, CommodityListActivity.class);//change to themba's class
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         finish();

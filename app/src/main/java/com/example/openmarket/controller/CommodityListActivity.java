@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,9 @@ public class CommodityListActivity extends AppCompatActivity {
     List<CommodityAdapter.CommodityDisplayData> displayDataList;
     FloatingActionButton fabAddPrice;
 
+    ImageButton trends;
+
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -46,6 +50,11 @@ public class CommodityListActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        trends = findViewById(R.id.trendsBtn);
+        trends.setOnClickListener(v -> {
+            Intent intent = new Intent(CommodityListActivity.this, TrendsActivity.class);
+            startActivity(intent);
+        });
 
 
         loadCommodities();
